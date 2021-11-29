@@ -139,6 +139,10 @@ class _SubscribeButtonState extends State<SubscribeButton> {
   Widget build(BuildContext context) {
     return TextButton(
       child: Text(subscribeState.isSubscribed ? "Subscribe" : "Unsubscribe"),
+      style: TextButton.styleFrom(
+        backgroundColor: subscribeState.isSubscribed ? Colors.red : Colors.grey,
+        primary: Colors.white,
+      ),
       onPressed: () {
         setState(() {
           subscribeState.isSubscribed = !subscribeState.isSubscribed;
