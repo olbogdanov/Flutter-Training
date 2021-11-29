@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:youtube_cone/recommended_videos.dart';
 
 class VideoDetail extends StatelessWidget {
-  const VideoDetail({Key? key}) : super(key: key);
+  final _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +11,14 @@ class VideoDetail extends StatelessWidget {
       appBar: AppBar(title: const Text('Video Detail')),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth > 600 && constraints.maxHeight > 400) {
-            return const WideVideoContainer();
+          if (constraints.maxWidth > 600) {
+            return WideVideoContainer(
+              descriptionKey: _key,
+            );
           } else {
-            return const NormalVideoContainer();
+            return NormalVideoContainer(
+              descriptionKey: _key,
+            );
           }
         },
       ),
@@ -23,16 +27,23 @@ class VideoDetail extends StatelessWidget {
 }
 
 class NormalVideoContainer extends StatelessWidget {
-  const NormalVideoContainer({
+  NormalVideoContainer({
     Key? key,
+    required this.descriptionKey,
   }) : super(key: key);
+  final Key descriptionKey;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [const MainVideoContainer(), const RecommendedVideos()],
+        children: [
+          MainVideoContainer(
+            key: descriptionKey,
+          ),
+          const RecommendedVideos()
+        ],
       ),
     );
   }
@@ -40,14 +51,20 @@ class NormalVideoContainer extends StatelessWidget {
 
 // var sizeOfHalf = MediaQuery.of(context).size.width / 2
 class WideVideoContainer extends StatelessWidget {
-  const WideVideoContainer({Key? key}) : super(key: key);
+  WideVideoContainer({
+    Key? key,
+    required this.descriptionKey,
+  }) : super(key: key);
+  final Key descriptionKey;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: const [
+      children: [
         Expanded(
-          child: MainVideoContainer(),
+          child: MainVideoContainer(
+            key: descriptionKey,
+          ),
           flex: 2,
         ),
         Expanded(

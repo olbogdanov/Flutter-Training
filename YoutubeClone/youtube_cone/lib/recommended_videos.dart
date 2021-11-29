@@ -28,7 +28,7 @@ class RecommendedVideos extends StatelessWidget {
           ),
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const VideoDetail()));
+                MaterialPageRoute(builder: (context) => VideoDetail()));
           },
         );
       },
