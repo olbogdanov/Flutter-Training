@@ -79,7 +79,11 @@ class MainVideoContainer extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.all(16.0),
-          child: Text("Title of the video", style: Theme.of(context).textTheme.headline4?.copyWith(color: Colors.orange)),
+          child: Text("Title of the video",
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4
+                  ?.copyWith(color: Colors.orange)),
         ),
         Container(
           width: double.infinity,
@@ -90,11 +94,35 @@ class MainVideoContainer extends StatelessWidget {
               Column(children: const [Icon(Icons.thumb_up), Text("4.2k")]),
               Column(children: const [Icon(Icons.thumb_down), Text("Dislike")]),
               Column(children: const [Icon(Icons.share), Text("Share")]),
-              Column(children: const [Icon(Icons.save), Text("Save")])
+              Column(children: const [Icon(Icons.save), Text("Save")]),
+              SubscribeButton()
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class SubscribeButton extends StatefulWidget {
+  const SubscribeButton({Key? key}) : super(key: key);
+
+  @override
+  _SubscribeButtonState createState() => _SubscribeButtonState();
+}
+
+class _SubscribeButtonState extends State<SubscribeButton> {
+  bool isSubscribed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      child: Text(isSubscribed ? "Subscribe" : "Unsubscribe"),
+      onPressed: () {
+        setState(() {
+          isSubscribed = !isSubscribed;
+        });
+      },
     );
   }
 }
