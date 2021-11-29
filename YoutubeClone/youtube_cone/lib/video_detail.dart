@@ -7,14 +7,17 @@ class VideoDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var state = SubscribeState();
     return Scaffold(
       appBar: AppBar(title: const Text('Video Detail')),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           if (constraints.maxWidth > 600 && constraints.maxHeight > 400) {
-            return const WideVideoContainer();
+            return WideVideoContainer(subscribeState: state);
           } else {
-            return const NormalVideoContainer();
+            return NormalVideoContainer(
+              subscribeState: state,
+            );
           }
         },
       ),
@@ -23,16 +26,21 @@ class VideoDetail extends StatelessWidget {
 }
 
 class NormalVideoContainer extends StatelessWidget {
-  const NormalVideoContainer({
-    Key? key,
-  }) : super(key: key);
+  NormalVideoContainer({Key? key, required this.subscribeState})
+      : super(key: key);
+  final SubscribeState subscribeState;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [const MainVideoContainer(), const RecommendedVideos()],
+        children: [
+          MainVideoContainer(
+            subscribeState: subscribeState,
+          ),
+          const RecommendedVideos()
+        ],
       ),
     );
   }
@@ -40,14 +48,18 @@ class NormalVideoContainer extends StatelessWidget {
 
 // var sizeOfHalf = MediaQuery.of(context).size.width / 2
 class WideVideoContainer extends StatelessWidget {
-  const WideVideoContainer({Key? key}) : super(key: key);
+  const WideVideoContainer({Key? key, required this.subscribeState})
+      : super(key: key);
+  final SubscribeState subscribeState;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: const [
+      children: [
         Expanded(
-          child: MainVideoContainer(),
+          child: MainVideoContainer(
+            subscribeState: subscribeState,
+          ),
           flex: 2,
         ),
         Expanded(
@@ -61,9 +73,10 @@ class WideVideoContainer extends StatelessWidget {
   }
 }
 
-@immutable
 class MainVideoContainer extends StatelessWidget {
-  const MainVideoContainer({Key? key}) : super(key: key);
+  MainVideoContainer({Key? key, required this.subscribeState})
+      : super(key: key);
+  final SubscribeState subscribeState;
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +108,9 @@ class MainVideoContainer extends StatelessWidget {
               Column(children: const [Icon(Icons.thumb_down), Text("Dislike")]),
               Column(children: const [Icon(Icons.share), Text("Share")]),
               Column(children: const [Icon(Icons.save), Text("Save")]),
-              SubscribeButton()
+              SubscribeButton(
+                subscribeState: subscribeState,
+              )
             ],
           ),
         ),
@@ -105,24 +120,34 @@ class MainVideoContainer extends StatelessWidget {
 }
 
 class SubscribeButton extends StatefulWidget {
-  const SubscribeButton({Key? key}) : super(key: key);
+  const SubscribeButton({Key? key, required this.subscribeState})
+      : super(key: key);
+  final SubscribeState subscribeState;
 
   @override
-  _SubscribeButtonState createState() => _SubscribeButtonState();
+  _SubscribeButtonState createState() => _SubscribeButtonState(subscribeState);
 }
 
 class _SubscribeButtonState extends State<SubscribeButton> {
-  bool isSubscribed = false;
+  // bool isSubscribed = false;
+
+  _SubscribeButtonState(this.subscribeState);
+
+  SubscribeState subscribeState;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Text(isSubscribed ? "Subscribe" : "Unsubscribe"),
+      child: Text(subscribeState.isSubscribed ? "Subscribe" : "Unsubscribe"),
       onPressed: () {
         setState(() {
-          isSubscribed = !isSubscribed;
+          subscribeState.isSubscribed = !subscribeState.isSubscribed;
         });
       },
     );
   }
+}
+
+class SubscribeState {
+  bool isSubscribed = false;
 }
