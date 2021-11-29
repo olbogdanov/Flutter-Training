@@ -8,12 +8,22 @@ class VideoDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Video Detail')), body: Detail());
+      appBar: AppBar(title: const Text('Video Detail')),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth > 600) {
+            return const WideVideoContainer();
+          } else {
+            return const NormalVideoContainer();
+          }
+        },
+      ),
+    );
   }
 }
 
-class Detail extends StatelessWidget {
-  const Detail({
+class NormalVideoContainer extends StatelessWidget {
+  const NormalVideoContainer({
     Key? key,
   }) : super(key: key);
 
@@ -53,5 +63,14 @@ class Detail extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class WideVideoContainer extends StatelessWidget {
+  const WideVideoContainer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
