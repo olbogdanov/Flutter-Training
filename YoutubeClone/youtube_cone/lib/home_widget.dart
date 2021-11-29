@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Flutter ListView")),
-      body: const RecommendedVideos(),
+      body: const RecommendedVideos(isScrolable: true,),
     );
   }
 }

@@ -3,15 +3,19 @@ import 'package:youtube_cone/home_widget.dart';
 import 'package:youtube_cone/video_detail.dart';
 import 'package:youtube_cone/video_widget.dart';
 
+@immutable
 class RecommendedVideos extends StatelessWidget {
-  const RecommendedVideos({Key? key}) : super(key: key);
+  const RecommendedVideos({Key? key, this.isScrolable = false})
+      : super(key: key);
+
+  final bool isScrolable;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: spacecrafts.length,
-      physics: NeverScrollableScrollPhysics(),
+      physics: isScrolable ? null : NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
           title: Card(
