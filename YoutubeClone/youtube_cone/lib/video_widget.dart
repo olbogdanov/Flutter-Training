@@ -44,8 +44,8 @@ class VideoFooter extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(url, style: TextStyle(color: Colors.black87)),
-            Text("some description"),
+            Text(url, style: Theme.of(context).textTheme.headline6),
+            Text("some description", style: Theme.of(context).textTheme.subtitle1,),
           ],
         ),
       ],

@@ -77,9 +77,9 @@ class MainVideoContainer extends StatelessWidget {
                 onPressed: () {}, icon: const Icon(Icons.play_arrow)),
           ),
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.all(16.0),
-          child: Text("Title of the video"),
+          child: Text("Title of the video", style: Theme.of(context).textTheme.headline4?.copyWith(color: Colors.orange)),
         ),
         Container(
           width: double.infinity,
