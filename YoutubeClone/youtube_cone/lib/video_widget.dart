@@ -35,6 +35,7 @@ class VideoFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        // use the lib for networking request to fix a tests: https://pub.dev/packages/network_image_mock
         // CircleAvatar(
         //   radius: 28,
         //   backgroundImage: NetworkImage(
