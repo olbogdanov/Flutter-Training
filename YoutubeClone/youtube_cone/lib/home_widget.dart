@@ -1,6 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_cone/recommended_videos.dart';
 import 'package:youtube_cone/video_detail.dart';
 import 'package:youtube_cone/video_widget.dart';
+
+const spacecrafts = [
+  "James Web",
+  "Enterprise",
+  "Hubble",
+  "Kepler",
+  "Juno",
+  "Casini",
+  "Columbia",
+  "Challenger",
+  "Huygens",
+  "Galileo",
+  "Apollo",
+  "Spitzer",
+  "WMAP",
+  "Swift",
+  "Atlantis"
+];
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,45 +31,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    var spacecrafts = [
-      "James Web",
-      "Enterprise",
-      "Hubble",
-      "Kepler",
-      "Juno",
-      "Casini",
-      "Columbia",
-      "Challenger",
-      "Huygens",
-      "Galileo",
-      "Apollo",
-      "Spitzer",
-      "WMAP",
-      "Swift",
-      "Atlantis"
-    ];
-    var listItem = ListView.builder(
-      itemCount: spacecrafts.length,
-      itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          title: Card(
-            elevation: 5.0,
-            child: Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: VideoWidget(url: spacecrafts[index]),
-            ),
-          ),
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const VideoDetail()));
-          },
-        );
-      },
-    );
-
     return Scaffold(
       appBar: AppBar(title: const Text("Flutter ListView")),
-      body: listItem,
+      body: const RecommendedVideos(),
     );
   }
 }

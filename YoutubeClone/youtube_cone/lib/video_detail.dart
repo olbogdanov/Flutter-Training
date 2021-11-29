@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_cone/recommended_videos.dart';
 
 class VideoDetail extends StatelessWidget {
   const VideoDetail({Key? key}) : super(key: key);
@@ -17,28 +18,32 @@ class Detail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            width: double.infinity,
-            height: 300,
-            color: Colors.blueAccent,
-            child:
-            IconButton(onPressed: () {}, icon: const Icon(Icons.play_arrow)),
-          ),
-          Text("Title of the video"),
-          Container(
-            width: double.infinity,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Icon(Icons.thumb_up),
-                Icon(Icons.thumb_down),
-              ],
+      SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            AspectRatio(
+              aspectRatio: 16/9,
+              child: Container(
+                color: Colors.blueAccent,
+                child:
+                IconButton(onPressed: () {}, icon: const Icon(Icons.play_arrow)),
+              ),
             ),
-          )
-        ],
+            Text("Title of the video"),
+            Container(
+              width: double.infinity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Icon(Icons.thumb_up),
+                  Icon(Icons.thumb_down),
+                ],
+              ),
+            ),
+            RecommendedVideos()
+          ],
+        ),
       );
   }
 }

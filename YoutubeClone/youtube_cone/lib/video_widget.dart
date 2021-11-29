@@ -9,12 +9,13 @@ class VideoWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width: double.infinity,
-          height: 400,
-          color: Colors.blueAccent,
-          child:
-              IconButton(onPressed: () {}, icon: const Icon(Icons.play_arrow)),
+        AspectRatio(
+          aspectRatio: 16/9,
+          child: Container(
+            color: Colors.blueAccent,
+            child:
+                IconButton(onPressed: () {}, icon: const Icon(Icons.play_arrow)),
+          ),
         ),
         VideoFooter(url: url),
       ],
