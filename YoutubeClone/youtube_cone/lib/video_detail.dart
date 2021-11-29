@@ -106,12 +106,12 @@ class MainVideoContainer extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(20.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(children: const [Icon(Icons.thumb_up), Text("4.2k")]),
-              Column(children: const [Icon(Icons.thumb_down), Text("Dislike")]),
-              Column(children: const [Icon(Icons.share), Text("Share")]),
-              Column(children: const [Icon(Icons.save), Text("Save")]),
+              Expanded(child: Column(children: const [Icon(Icons.thumb_up), Text("4.2k")])),
+              Expanded(child: Column(children: const [Icon(Icons.thumb_down), Text("Dislike")])),
+              Expanded(child: Column(children: const [Icon(Icons.share), Text("Share")])),
+              Expanded(child: Column(children: const [Icon(Icons.save), Text("Save")])),
               SubscribeButton()
             ],
           ),
@@ -133,17 +133,19 @@ class _SubscribeButtonState extends State<SubscribeButton> {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      child: Text(isSubscribed ? "Subscribe" : "Unsubscribe"),
-      style: TextButton.styleFrom(
-        backgroundColor: isSubscribed ? Colors.red : Colors.grey,
-        primary: Colors.white,
+    return Expanded(
+      child: TextButton(
+        child: Text(isSubscribed ? "Subscribe" : "Unsubscribe"),
+        style: TextButton.styleFrom(
+          backgroundColor: isSubscribed ? Colors.red : Colors.grey,
+          primary: Colors.white,
+        ),
+        onPressed: () {
+          setState(() {
+            isSubscribed = !isSubscribed;
+          });
+        },
       ),
-      onPressed: () {
-        setState(() {
-          isSubscribed = !isSubscribed;
-        });
-      },
     );
   }
 }

@@ -35,18 +35,20 @@ class VideoFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          radius: 28,
-          backgroundImage: NetworkImage(
-              "https://cdn1.vectorstock.com/i/1000x1000/23/70/man-avatar-icon-flat-vector-19152370.jpg"),
-          child: Stack(),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(url, style: Theme.of(context).textTheme.headline6),
-            Text("some description", style: Theme.of(context).textTheme.subtitle1,),
-          ],
+        // CircleAvatar(
+        //   radius: 28,
+        //   backgroundImage: NetworkImage(
+        //       "https://cdn1.vectorstock.com/i/1000x1000/23/70/man-avatar-icon-flat-vector-19152370.jpg"),
+        //   child: Stack(),
+        // ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(url, style: Theme.of(context).textTheme.headline6),
+              Text("some description", style: Theme.of(context).textTheme.subtitle1,),
+            ],
+          ),
         ),
       ],
     );
