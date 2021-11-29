@@ -6,7 +6,12 @@ class VideoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-        onPressed: () {}, icon: const Icon(Icons.access_alarm_rounded));
+    return Container(
+      width: double.infinity,
+      height: 400,
+      color: Colors.blueAccent,
+      child: IconButton(
+          onPressed: () {}, icon: const Icon(Icons.access_alarm_rounded)),
+    );
   }
 }
