@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_cone/video_widget.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -48,15 +49,5 @@ class _HomeState extends State<Home> {
       appBar: AppBar(title: const Text("Flutter ListView")),
       body: listItem,
     );
-  }
-}
-
-class VideoWidget extends StatelessWidget {
-  const VideoWidget({Key? key, required this.url}) : super(key: key);
-  final String url;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(url);
   }
 }
