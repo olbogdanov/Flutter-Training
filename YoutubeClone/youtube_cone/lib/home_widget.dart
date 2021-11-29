@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
             child: Container(
               alignment: Alignment.centerLeft,
               margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: Text(spacecrafts[index]),
+              child: VideoWidget(url: spacecrafts[index]),
             ),
           ),
           onTap: () {},
@@ -48,5 +48,15 @@ class _HomeState extends State<Home> {
       appBar: AppBar(title: const Text("Flutter ListView")),
       body: listItem,
     );
+  }
+}
+
+class VideoWidget extends StatelessWidget {
+  const VideoWidget({Key? key, required this.url}) : super(key: key);
+  final String url;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(url);
   }
 }
