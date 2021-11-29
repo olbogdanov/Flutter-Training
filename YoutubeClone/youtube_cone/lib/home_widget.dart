@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_cone/video_detail.dart';
 import 'package:youtube_cone/video_widget.dart';
 
 class Home extends StatefulWidget {
@@ -40,7 +41,9 @@ class _HomeState extends State<Home> {
               child: VideoWidget(url: spacecrafts[index]),
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const VideoDetail()));
+          },
         );
       },
     );
