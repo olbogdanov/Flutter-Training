@@ -1,7 +1,10 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:state_management_cart/ProductsProvider.dart';
 import 'package:state_management_cart/cart_overview.dart';
 import 'package:state_management_cart/product_list.dart';
+import 'package:state_management_cart/shopingcart.dart';
 
 void main() {
   runApp(ShoppingCartApp());
@@ -14,7 +17,13 @@ class ShoppingCartApp extends StatelessWidget {
     // TODO inject ProductsModel
     return MaterialApp(
       title: "ShoppingCart App",
-      home: _HomePage(),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => ShopingCart()),
+          ChangeNotifierProvider(create: (context) => ProductsProvider()),
+        ],
+        child: _HomePage(),
+      ),
     );
   }
 }
@@ -26,6 +35,12 @@ class _HomePage extends StatefulWidget {
 
 class _HomePageState extends State<_HomePage> {
   int _currentIndex = 0;
+
+  @override
+  void didChangeDependencies() {
+    ProductsProvider productsProvider = Provider.of<ProductsProvider>(context);
+    productsProvider.loadData();
+  } // final FakeShopApi()
 
   @override
   Widget build(BuildContext context) {

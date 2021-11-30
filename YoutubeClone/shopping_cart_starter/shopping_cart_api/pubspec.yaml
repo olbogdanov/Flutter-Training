@@ -6,6 +6,8 @@ environment:
 dependencies:
   deep_pick: ^0.10.0
   http: ^0.13.0
+  provider: ^6.0.0
+
 
 dev_dependencies:
   lint: ^1.0.0

@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:state_management_cart/api/product.dart';
+import 'package:provider/provider.dart';
+import 'package:state_management_cart/ProductsProvider.dart';
 import 'package:state_management_cart/product_grid.dart';
 
 class ProductList extends StatelessWidget {
-  static PageRoute<void> route() {
-    return MaterialPageRoute(builder: (context) => ProductList());
-  }
-
   @override
   Widget build(BuildContext context) {
-    // TODO get products from ProductsModel
-    final List<Product> products = [];
+    ProductsProvider productsProvider = Provider.of<ProductsProvider>(context);
+    // bool isLoading = false;
+    // assert(
+    //   () {
+    //     isLoading = true;
+    //     return true;
+    //   }(),
+    // );
 
-    // TODO get loading state from ProductsModel
-    bool isLoading = false;
-    assert(
-      () {
-        isLoading = true;
-        return true;
-      }(),
-    );
-
-    if (isLoading) {
+    if (productsProvider.products.isEmpty) {
       return const Center(child: CircularProgressIndicator());
     }
     return ProductGrid(
-      products: products,
+      products: productsProvider.products,
       onProductAdd: (product) {
         // TODO add product to cart
       },

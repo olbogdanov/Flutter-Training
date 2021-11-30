@@ -11,7 +11,7 @@ dependencies:
   badges: ^2.0.1
   flutter:
     sdk: flutter
-
+  provider: ^6.0.0
   # TODO replace with your own api package
   shopping_cart_api:
     path: shopping_cart_api
