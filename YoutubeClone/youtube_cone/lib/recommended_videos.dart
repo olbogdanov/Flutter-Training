@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:youtube_cone/home_widget.dart';
 import 'package:youtube_cone/video_detail.dart';
 import 'package:youtube_cone/video_widget.dart';
@@ -27,8 +29,11 @@ class RecommendedVideos extends StatelessWidget {
             ),
           ),
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => VideoDetail()));
+            if (kIsWeb) {
+              context.go('/page2');
+            } else {
+              context.push('/page2');
+            }
           },
         );
       },
