@@ -30,4 +30,21 @@ void main() {
       assert(provider.products.isNotEmpty);
     });
   });
+
+  group('products', () {
+    test('load products', () async {
+      final provider = ProductsStateProvider(ResultLoading());
+      await provider.loadData();
+      assert(provider.state is ResultState);
+      final products = (provider.state as ResultState).products;
+      assert(products.isNotEmpty);
+    });
+  });
+
+  group('products', () {
+    test('load products', () async {
+      final provider = ProductsStateProvider(ResultLoading());
+      assert(provider.state is ResultLoading);
+    });
+  });
 }
