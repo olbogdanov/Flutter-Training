@@ -19,7 +19,7 @@ class ShoppingCartApp extends StatelessWidget {
       title: "ShoppingCart App",
       home: MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => ShopingCart()),
+          ChangeNotifierProvider(create: (context) => ShoppingCardProvider()),
           ChangeNotifierProvider(create: (context) => ProductsProvider()),
         ],
         child: _HomePage(),

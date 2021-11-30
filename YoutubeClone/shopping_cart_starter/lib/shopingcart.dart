@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:state_management_cart/api/product.dart';
 
-class ShopingCart with ChangeNotifier {
+class ShoppingCardProvider with ChangeNotifier {
   List<Product> _productList = [];
 
   List<Product> get product => _productList;
@@ -13,5 +13,6 @@ class ShopingCart with ChangeNotifier {
 
   void removeProductListItem(String name) {
     _productList.removeWhere((element) => element.name == name);
+    notifyListeners();
   }
 }
