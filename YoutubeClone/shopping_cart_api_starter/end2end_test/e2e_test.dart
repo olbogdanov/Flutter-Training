@@ -5,7 +5,8 @@ import 'package:test/test.dart';
 void main() {
   test('load products', () async {
     final api = ShopApi();
-    // TODO make api call and verify result
-    throw "TODO";
+    final products = await api.getAllProducts();
+    print(products);
+    assert(products != null);
   });
 }
