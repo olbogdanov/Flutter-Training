@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:state_management_cart/ProductsProvider.dart';
 import 'package:state_management_cart/cart_overview.dart';
@@ -19,6 +20,9 @@ class ShoppingCartApp extends StatelessWidget {
       title: "ShoppingCart App",
       home: MultiProvider(
         providers: [
+          StateNotifierProvider<ProductsStateProvider, Result>(
+              create: (context) =>
+                  ProductsStateProvider(ResultLoading())..loadData()),
           ChangeNotifierProvider(create: (context) => ShoppingCardProvider()),
           ChangeNotifierProvider(create: (context) => ProductsProvider()),
         ],
@@ -36,11 +40,11 @@ class _HomePage extends StatefulWidget {
 class _HomePageState extends State<_HomePage> {
   int _currentIndex = 0;
 
-  @override
-  void didChangeDependencies() {
-    ProductsProvider productsProvider = Provider.of<ProductsProvider>(context);
-    productsProvider.loadData();
-  } // final FakeShopApi()
+  // @override
+  // void didChangeDependencies() {
+  //   final productsStateProvider = context.read<ProductsStateProvider>();
+  //   productsStateProvider.loadData();
+  // } // final FakeShopApi()
 
   @override
   Widget build(BuildContext context) {
