@@ -44,6 +44,9 @@ class _HomePageState extends State<_HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    ShoppingCardProvider shoppingCardProvider =
+        Provider.of<ShoppingCardProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Dash Store"),
@@ -68,7 +71,7 @@ class _HomePageState extends State<_HomePage> {
             icon: Badge(
               position: BadgePosition.topEnd(),
               // TODO get shopping cart count
-              badgeContent: Text('0'),
+              badgeContent: Text("${shoppingCardProvider.product.length}"),
               badgeColor: const Color(0xFFFDC403),
               child: const Icon(Icons.shopping_basket),
             ),
