@@ -35,13 +35,12 @@ class VideoFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        // use the lib for networking request to fix a tests: https://pub.dev/packages/network_image_mock
-        // CircleAvatar(
-        //   radius: 28,
-        //   backgroundImage: NetworkImage(
-        //       "https://cdn1.vectorstock.com/i/1000x1000/23/70/man-avatar-icon-flat-vector-19152370.jpg"),
-        //   child: Stack(),
-        // ),
+        CircleAvatar(
+          radius: 28,
+          backgroundImage: const NetworkImage(
+              "https://cdn1.vectorstock.com/i/1000x1000/23/70/man-avatar-icon-flat-vector-19152370.jpg"),
+          child: Stack(),
+        ),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
