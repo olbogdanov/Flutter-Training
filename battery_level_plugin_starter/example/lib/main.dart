@@ -18,7 +18,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   String _batteryLevel = 'Unknown btl';
-  BatteryInformation _batteryInformation = BatteryInformation('Unkown', false);
+  BatteryInformation _batteryInformation = BatteryInformation(99, false);
 
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
       batteryLevel = 'battery level is not available';
     }
 
-    BatteryInformation batteryInformation = BatteryInformation('Unkown', false);
+    BatteryInformation batteryInformation = BatteryInformation(55, false);
 
     try {
       String batteryInformationJson =
@@ -94,13 +94,13 @@ class _MyAppState extends State<MyApp> {
 }
 
 class BatteryInformation {
-  String batteryLevel;
+  int batteryLevel;
   bool isCharging;
 
   BatteryInformation(this.batteryLevel, this.isCharging);
 
   factory BatteryInformation.fromJson(dynamic json) {
     return BatteryInformation(
-        json['batteryLevel'] as String, json['isCharging'] as bool);
+        json['batteryLevel'] as int, json['isCharging'] as bool);
   }
 }
