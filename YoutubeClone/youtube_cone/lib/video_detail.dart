@@ -101,6 +101,9 @@ class _MainVideoContainerState extends State<MainVideoContainer>
         setState(() {
           // The state that has changed here is the animation object’s value.
         });
+      })
+      ..addStatusListener((status) {
+        setState(() {});
       });
     controller.forward();
   }
@@ -126,7 +129,9 @@ class _MainVideoContainerState extends State<MainVideoContainer>
                 controller.forward();
               }
             },
-            icon: Icon(Icons.play_arrow_rounded)),
+            icon: controller.isAnimating
+                ? Icon(Icons.pause)
+                : Icon(Icons.play_arrow_rounded)),
         Padding(
           padding: EdgeInsets.all(16.0),
           child: Text("Title of the video",
