@@ -79,8 +79,31 @@ class WideVideoContainer extends StatelessWidget {
 }
 
 @immutable
-class MainVideoContainer extends StatelessWidget {
+class MainVideoContainer extends StatefulWidget {
   const MainVideoContainer({Key? key}) : super(key: key);
+
+  @override
+  State<MainVideoContainer> createState() => _MainVideoContainerState();
+}
+
+class _MainVideoContainerState extends State<MainVideoContainer>
+    with SingleTickerProviderStateMixin {
+  late Animation<double> animation;
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(duration: const Duration(seconds: 26), vsync: this);
+    animation = Tween<double>(begin: 0, end: 1).animate(controller)
+      ..addListener(() {
+        setState(() {
+          // The state that has changed here is the animation object’s value.
+        });
+      });
+    controller.forward();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +117,7 @@ class MainVideoContainer extends StatelessWidget {
                 onPressed: () {}, icon: const Icon(Icons.play_arrow)),
           ),
         ),
-        PlayBar(0.5),
+        PlayBar(animation.value),
         Padding(
           padding: EdgeInsets.all(16.0),
           child: Text("Title of the video",
