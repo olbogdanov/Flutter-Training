@@ -20,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   String _batteryLevel = 'Unknown btl';
   BatteryInformation _batteryInformation = BatteryInformation(99, false);
+  BatteryInformation _dynamicBatteryInformation = BatteryInformation(99, false);
 
   @override
   void initState() {
@@ -29,6 +30,12 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
+    BatteryLevel.batteryInformationStream().listen((batteryInformation) {
+      setState(() {
+        _dynamicBatteryInformation = batteryInformation;
+      });
+    });
+
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
@@ -96,11 +103,4 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-}
-
-class BatteryInformation {
-  int batteryLevel;
-  bool isCharging;
-
-  BatteryInformation(this.batteryLevel, this.isCharging);
 }

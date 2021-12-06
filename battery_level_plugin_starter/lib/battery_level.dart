@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
@@ -20,4 +21,20 @@ class BatteryLevel {
         await _channel.invokeMethod('getBatteryInformation');
     return batteryInformationJson;
   }
+
+  static Stream<BatteryInformation> batteryInformationStream() {
+    const EventChannel _stream = EventChannel('channel/battery_info');
+    return _stream.receiveBroadcastStream().distinct().map((data) {
+      final parsed = jsonDecode(data as String) as Map<String, dynamic>;
+      return BatteryInformation(
+          parsed['batteryLevel'] as int, parsed['isCharing'] as bool);
+    });
+  }
+}
+
+class BatteryInformation {
+  int batteryLevel;
+  bool isCharging;
+
+  BatteryInformation(this.batteryLevel, this.isCharging);
 }
