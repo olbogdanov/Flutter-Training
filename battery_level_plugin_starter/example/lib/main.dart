@@ -18,6 +18,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   String _batteryLevel = 'Unknown btl';
+  BatteryInformation _batteryInformation = BatteryInformation('Unkown', false);
 
   @override
   void initState() {
@@ -45,6 +46,16 @@ class _MyAppState extends State<MyApp> {
       batteryLevel = 'battery level is not available';
     }
 
+    BatteryInformation batteryInformation = BatteryInformation('Unkown', false);
+
+    try {
+      String batteryInformationJson =
+          await BatteryLevel.batteryInformation ?? '[]';
+      batteryInformation = BatteryInformation.fromJson(batteryInformationJson);
+    } on PlatformException {
+      batteryLevel = 'battery level is not available';
+    }
+
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
@@ -53,6 +64,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _platformVersion = platformVersion;
       _batteryLevel = batteryLevel;
+      _batteryInformation = batteryInformation;
     });
   }
 
@@ -68,6 +80,8 @@ class _MyAppState extends State<MyApp> {
             children: [
               Text('Running on: $_platformVersion\n'),
               Text('Battery level: $_batteryLevel\n'),
+              Text(
+                  'Battery level: ${_batteryInformation.batteryLevel}\n charging: ${_batteryInformation.isCharging}'),
               TextButton(
                   onPressed: () => {initPlatformState()},
                   child: const Text("REFRESH")),
@@ -76,5 +90,17 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+}
+
+class BatteryInformation {
+  String batteryLevel;
+  bool isCharging;
+
+  BatteryInformation(this.batteryLevel, this.isCharging);
+
+  factory BatteryInformation.fromJson(dynamic json) {
+    return BatteryInformation(
+        json['batteryLevel'] as String, json['isCharging'] as bool);
   }
 }

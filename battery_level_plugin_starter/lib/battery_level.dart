@@ -14,4 +14,10 @@ class BatteryLevel {
     final String? battery = await _channel.invokeMethod('getBatteryLevel');
     return battery;
   }
+
+  static Future<String?> get batteryInformation async {
+    final String? batteryInformationJson =
+        await _channel.invokeMethod('getBatteryInformation');
+    return batteryInformationJson;
+  }
 }
