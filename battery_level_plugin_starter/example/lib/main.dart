@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:battery_level/battery_level.dart';
 import 'package:flutter/material.dart';
@@ -51,9 +52,13 @@ class _MyAppState extends State<MyApp> {
     try {
       String batteryInformationJson =
           await BatteryLevel.batteryInformation ?? '[]';
-      batteryInformation = BatteryInformation.fromJson(batteryInformationJson);
+      Map<String, dynamic> parsed =
+          jsonDecode(batteryInformationJson) as Map<String, dynamic>;
+
+      batteryInformation =
+          BatteryInformation(parsed['batteryLevel'], parsed['isCharing']);
     } on PlatformException {
-      batteryLevel = 'battery level is not available';
+      print('battery information is not available');
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -98,9 +103,4 @@ class BatteryInformation {
   bool isCharging;
 
   BatteryInformation(this.batteryLevel, this.isCharging);
-
-  factory BatteryInformation.fromJson(dynamic json) {
-    return BatteryInformation(
-        json['batteryLevel'] as int, json['isCharging'] as bool);
-  }
 }
