@@ -13,7 +13,8 @@ public class SwiftBatteryLevelPlugin: NSObject, FlutterPlugin {
       case "getPlatformVersion":
           result("iOS " + UIDevice.current.systemVersion)
       case "getBatteryLevel":
-          result("" + UIDevice.current.battery_level)
+          result("33")
+//           result("" + UIDevice.current.battery_level)
       default:
           result(FlutterMethodNotImplemented)
       }
