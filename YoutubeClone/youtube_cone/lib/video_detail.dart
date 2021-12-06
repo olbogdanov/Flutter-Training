@@ -109,6 +109,7 @@ class _MainVideoContainerState extends State<MainVideoContainer>
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -121,17 +122,7 @@ class _MainVideoContainerState extends State<MainVideoContainer>
           ),
         ),
         PlayBar(animation.value),
-        IconButton(
-            onPressed: () {
-              if (controller.isAnimating) {
-                controller.stop();
-              } else {
-                controller.forward();
-              }
-            },
-            icon: controller.isAnimating
-                ? Icon(Icons.pause)
-                : Icon(Icons.play_arrow_rounded)),
+        playButton(duration: Duration(seconds: 2)),
         Padding(
           padding: EdgeInsets.all(16.0),
           child: Text("Title of the video",
@@ -166,6 +157,50 @@ class _MainVideoContainerState extends State<MainVideoContainer>
         ),
       ],
     );
+  }
+}
+
+class playButton extends StatefulWidget {
+  final Duration duration;
+
+  const playButton({Key? key, required this.duration}) : super(key: key);
+
+  @override
+  _playButtonState createState() => _playButtonState();
+}
+
+class _playButtonState extends State<playButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
+    animation = Tween<double>(begin: 0, end: 1).animate(_controller);
+  }
+
+  @override
+  void didUpdateWidget(playButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          _controller.forward();
+        },
+        icon:
+            AnimatedIcon(icon: AnimatedIcons.play_pause, progress: animation));
   }
 }
 
