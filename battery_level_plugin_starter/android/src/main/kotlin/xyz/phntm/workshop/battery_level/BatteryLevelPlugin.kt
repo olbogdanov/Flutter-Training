@@ -24,6 +24,9 @@ class BatteryLevelPlugin: FlutterPlugin, MethodCallHandler {
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     if (call.method == "getPlatformVersion") {
       result.success("Android ${android.os.Build.VERSION.RELEASE}")
+    } if (call.method == "getBatteryLevel") {
+      val bm = context.getSystemService(BATTERY_SERVICE) as BatteryManager
+      result.success("${bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)}")
     } else {
       result.notImplemented()
     }
