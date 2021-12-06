@@ -118,6 +118,15 @@ class _MainVideoContainerState extends State<MainVideoContainer>
           ),
         ),
         PlayBar(animation.value),
+        IconButton(
+            onPressed: () {
+              if (controller.isAnimating) {
+                controller.stop();
+              } else {
+                controller.forward();
+              }
+            },
+            icon: Icon(Icons.play_arrow_rounded)),
         Padding(
           padding: EdgeInsets.all(16.0),
           child: Text("Title of the video",
