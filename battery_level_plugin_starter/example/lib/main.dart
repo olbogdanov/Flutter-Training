@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:battery_level/battery_level.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  String _batteryLevel = 'Unknown btl';
 
   @override
   void initState() {
@@ -36,6 +37,14 @@ class _MyAppState extends State<MyApp> {
       platformVersion = 'Failed to get platform version.';
     }
 
+    String batteryLevel;
+
+    try {
+      batteryLevel = await BatteryLevel.batteryLevel ?? 'unknown battery level';
+    } on PlatformException {
+      batteryLevel = 'battery level is not available';
+    }
+
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
@@ -43,6 +52,7 @@ class _MyAppState extends State<MyApp> {
 
     setState(() {
       _platformVersion = platformVersion;
+      _batteryLevel = batteryLevel;
     });
   }
 
@@ -54,7 +64,12 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            children: [
+              Text('Running on: $_platformVersion\n'),
+              Text('Battery level: $_batteryLevel\n'),
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/services.dart';
@@ -9,5 +8,10 @@ class BatteryLevel {
   static Future<String?> get platformVersion async {
     final String? version = await _channel.invokeMethod('getPlatformVersion');
     return version;
+  }
+
+  static Future<String?> get batteryLevel async {
+    final String? battery = await _channel.invokeMethod('getBatteryLevel');
+    return battery;
   }
 }
