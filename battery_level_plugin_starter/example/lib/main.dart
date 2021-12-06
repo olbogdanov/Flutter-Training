@@ -68,6 +68,9 @@ class _MyAppState extends State<MyApp> {
             children: [
               Text('Running on: $_platformVersion\n'),
               Text('Battery level: $_batteryLevel\n'),
+              TextButton(
+                  onPressed: () => {initPlatformState()},
+                  child: const Text("REFRESH")),
             ],
           ),
         ),
