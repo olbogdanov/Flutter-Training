@@ -94,6 +94,7 @@ class MainVideoContainer extends StatelessWidget {
                 onPressed: () {}, icon: const Icon(Icons.play_arrow)),
           ),
         ),
+        PlayBar(0.5),
         Padding(
           padding: EdgeInsets.all(16.0),
           child: Text("Title of the video",
@@ -108,13 +109,41 @@ class MainVideoContainer extends StatelessWidget {
           child: Row(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: Column(children: const [Icon(Icons.thumb_up), Text("4.2k")])),
-              Expanded(child: Column(children: const [Icon(Icons.thumb_down), Text("Dislike")])),
-              Expanded(child: Column(children: const [Icon(Icons.share), Text("Share")])),
-              Expanded(child: Column(children: const [Icon(Icons.save), Text("Save")])),
+              Expanded(
+                  child: Column(
+                      children: const [Icon(Icons.thumb_up), Text("4.2k")])),
+              Expanded(
+                  child: Column(children: const [
+                Icon(Icons.thumb_down),
+                Text("Dislike")
+              ])),
+              Expanded(
+                  child: Column(
+                      children: const [Icon(Icons.share), Text("Share")])),
+              Expanded(
+                  child:
+                      Column(children: const [Icon(Icons.save), Text("Save")])),
               SubscribeButton()
             ],
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class PlayBar extends StatelessWidget {
+  double _progress;
+  PlayBar(this._progress);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          color: Colors.green,
+          height: 5,
+          width: MediaQuery.of(context).size.width * _progress,
         ),
       ],
     );
